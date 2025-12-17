@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Meme - Meme Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            pink: '#ff00ff',
+                            cyan: '#00ffff',
+                            green: '#00ff00',
+                            yellow: '#ffff00',
+                            purple: '#cc00ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-white font-inter min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-neon-pink/30 sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-poppins font-bold bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                    😂 Meme Community
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-neon-cyan transition">Home</a>
+                    <a href="categories.html" class="text-gray-300 hover:text-neon-cyan transition">Categories</a>
+                    <a href="upload.html" class="bg-gradient-to-r from-neon-pink to-neon-purple px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-pink/50 transition">Upload Meme</a>
+                    <a href="search.html" class="text-gray-300 hover:text-neon-cyan transition">Search</a>
+                    <a href="profile.html" class="text-gray-300 hover:text-neon-cyan transition">Profile</a>
+                </div>
+                <button class="md:hidden text-neon-cyan" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-4xl font-poppins font-bold mb-8 bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent text-center">
+            📤 Upload Your Meme
+        </h1>
+
+        <form id="uploadForm" class="space-y-6">
+            <!-- Drag & Drop Upload Area -->
+            <div id="dropZone" class="border-2 border-dashed border-neon-cyan/50 rounded-lg p-12 text-center hover:border-neon-cyan transition cursor-pointer bg-gray-900/50">
+                <input type="file" id="fileInput" accept="image/*,video/*" class="hidden">
+                <div class="space-y-4">
+                    <div class="text-6xl">📸</div>
+                    <div>
+                        <p class="text-xl font-semibold text-neon-cyan mb-2">Drag & Drop your meme here</p>
+                        <p class="text-gray-400">or click to browse</p>
+                        <p class="text-sm text-gray-500 mt-2">Supports: JPG, PNG, GIF, MP4, MOV</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Area -->
+            <div id="previewArea" class="hidden">
+                <h3 class="text-xl font-semibold mb-4 text-neon-green">Preview</h3>
+                <div id="previewContainer" class="border border-neon-green/30 rounded-lg p-4 bg-gray-900">
+                    <!-- Preview will appear here -->
+                </div>
+                <button type="button" onclick="removePreview()" class="mt-4 text-red-400 hover:text-red-300 transition">Remove</button>
+            </div>
+
+            <!-- Meme Title -->
+            <div>
+                <label for="memeTitle" class="block text-lg font-semibold mb-2 text-neon-pink">Meme Title</label>
+                <input type="text" id="memeTitle" placeholder="Enter a catchy title..." 
+                    class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/50 transition">
+            </div>
+
+            <!-- Category Selection -->
+            <div>
+                <label class="block text-lg font-semibold mb-2 text-neon-pink">Category</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <label class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                        <input type="radio" name="category" value="funny" class="text-neon-pink">
+                        <span>Funny</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                        <input type="radio" name="category" value="relatable" class="text-neon-pink">
+                        <span>Relatable</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                        <input type="radio" name="category" value="dark" class="text-neon-pink">
+                        <span>Dark</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                        <input type="radio" name="category" value="tech" class="text-neon-pink">
+                        <span>Tech</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                        <input type="radio" name="category" value="student" class="text-neon-pink">
+                        <span>Student</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div>
+                <label for="memeTags" class="block text-lg font-semibold mb-2 text-neon-pink">Tags (separated by commas)</label>
+                <input type="text" id="memeTags" placeholder="#funny #relatable #monday" 
+                    class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/50 transition">
+                <p class="text-sm text-gray-400 mt-2">Add hashtags to help others find your meme</p>
+            </div>
+
+            <!-- NSFW Toggle -->
+            <div class="flex items-center space-x-3">
+                <input type="checkbox" id="nsfwToggle" class="w-5 h-5 text-neon-pink rounded">
+                <label for="nsfwToggle" class="text-lg">Mark as NSFW</label>
+            </div>
+
+            <!-- Schedule Post (Optional) -->
+            <div id="scheduleSection" class="hidden">
+                <label for="scheduleDate" class="block text-lg font-semibold mb-2 text-neon-pink">Schedule Post</label>
+                <input type="datetime-local" id="scheduleDate" 
+                    class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/50 transition">
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <input type="checkbox" id="scheduleToggle" onchange="toggleSchedule()" class="w-5 h-5 text-neon-pink rounded">
+                <label for="scheduleToggle" class="text-lg">Schedule this post</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex space-x-4 pt-4">
+                <button type="submit" class="flex-1 bg-gradient-to-r from-neon-pink to-neon-purple px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-neon-pink/50 transition">
+                    🚀 Publish Meme
+                </button>
+                <button type="button" onclick="saveDraft()" class="px-8 py-4 rounded-lg font-semibold border border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 transition">
+                    💾 Save Draft
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>
+

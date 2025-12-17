@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Meme Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            pink: '#ff00ff',
+                            cyan: '#00ffff',
+                            green: '#00ff00',
+                            yellow: '#ffff00',
+                            purple: '#cc00ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-white font-inter min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-red-500/30 sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-poppins font-bold bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                    😂 Meme Community
+                </a>
+                <div class="flex items-center space-x-6">
+                    <span class="px-3 py-1 bg-red-600 text-white rounded-lg text-sm font-semibold">ADMIN</span>
+                    <a href="index.html" class="text-gray-300 hover:text-neon-cyan transition">Back to Site</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-poppins font-bold mb-8 text-red-400">🔒 Admin Panel</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <div class="text-3xl mb-2">📋</div>
+                <div class="text-2xl font-bold text-neon-cyan mb-1">23</div>
+                <div class="text-gray-400">Pending Approvals</div>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <div class="text-3xl mb-2">🚫</div>
+                <div class="text-2xl font-bold text-red-400 mb-1">8</div>
+                <div class="text-gray-400">Reported Content</div>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <div class="text-3xl mb-2">👥</div>
+                <div class="text-2xl font-bold text-neon-green mb-1">12,456</div>
+                <div class="text-gray-400">Total Users</div>
+            </div>
+        </div>
+
+        <!-- Pending Approvals -->
+        <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 mb-6">
+            <h2 class="text-2xl font-poppins font-bold mb-4 text-neon-cyan">📋 Pending Meme Approvals</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://via.placeholder.com/100" alt="Meme" class="w-24 h-24 rounded-lg object-cover">
+                        <div>
+                            <h3 class="font-semibold">New Meme by @user123</h3>
+                            <p class="text-sm text-gray-400">Category: Funny | Tags: #monday #work</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="approveMeme(1)" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg transition">✓ Approve</button>
+                        <button onclick="rejectMeme(1)" class="px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg transition">✗ Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reported Content -->
+        <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 mb-6">
+            <h2 class="text-2xl font-poppins font-bold mb-4 text-red-400">🚫 Reported Content</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://via.placeholder.com/100" alt="Meme" class="w-24 h-24 rounded-lg object-cover">
+                        <div>
+                            <h3 class="font-semibold">Reported by @user456</h3>
+                            <p class="text-sm text-gray-400">Reason: Offensive Content</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="reviewReport(1)" class="px-4 py-2 bg-neon-cyan hover:bg-neon-cyan/80 rounded-lg transition">Review</button>
+                        <button onclick="deleteReported(1)" class="px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg transition">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management -->
+        <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+            <h2 class="text-2xl font-poppins font-bold mb-4 text-neon-pink">👥 User Management</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://via.placeholder.com/50" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <h3 class="font-semibold">@username</h3>
+                            <p class="text-sm text-gray-400">3 violations</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="banUser('user123')" class="px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg transition">Ban</button>
+                        <button onclick="muteUser('user123')" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 rounded-lg transition">Mute</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function approveMeme(id) {
+            if (confirm('Approve this meme?')) {
+                alert('Meme approved!');
+                // In production, send API request
+            }
+        }
+
+        function rejectMeme(id) {
+            if (confirm('Reject this meme?')) {
+                alert('Meme rejected!');
+                // In production, send API request
+            }
+        }
+
+        function reviewReport(id) {
+            alert('Opening report details...');
+        }
+
+        function deleteReported(id) {
+            if (confirm('Delete this content?')) {
+                alert('Content deleted!');
+            }
+        }
+
+        function banUser(username) {
+            if (confirm(`Ban user ${username}?`)) {
+                alert('User banned!');
+            }
+        }
+
+        function muteUser(username) {
+            if (confirm(`Mute user ${username}?`)) {
+                alert('User muted!');
+            }
+        }
+    </script>
+</body>
+</html>
+

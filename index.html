@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😂 Meme Community - Trending Memes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            pink: '#ff00ff',
+                            cyan: '#00ffff',
+                            green: '#00ff00',
+                            yellow: '#ffff00',
+                            purple: '#cc00ff',
+                        }
+                    },
+                    animation: {
+                        'pulse-neon': 'pulse-neon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-white font-inter min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-neon-pink/30 sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-poppins font-bold bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                    😂 Meme Community
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-neon-cyan hover:text-neon-pink transition">Home</a>
+                    <a href="categories.html" class="text-gray-300 hover:text-neon-cyan transition">Categories</a>
+                    <a href="upload.html" class="bg-gradient-to-r from-neon-pink to-neon-purple px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-pink/50 transition">Upload Meme</a>
+                    <a href="search.html" class="text-gray-300 hover:text-neon-cyan transition">Search</a>
+                    <a href="profile.html" class="text-gray-300 hover:text-neon-cyan transition">Profile</a>
+                    <a href="login.html" class="text-gray-300 hover:text-neon-cyan transition">Login</a>
+                </div>
+                <button class="md:hidden text-neon-cyan" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-neon-pink/30 p-4 space-y-3">
+            <a href="index.html" class="block text-neon-cyan">Home</a>
+            <a href="categories.html" class="block text-gray-300">Categories</a>
+            <a href="upload.html" class="block text-gray-300">Upload Meme</a>
+            <a href="search.html" class="block text-gray-300">Search</a>
+            <a href="profile.html" class="block text-gray-300">Profile</a>
+            <a href="login.html" class="block text-gray-300">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Category Tabs -->
+        <div class="flex flex-wrap gap-3 mb-8 overflow-x-auto pb-4">
+            <button class="category-tab active px-6 py-2 rounded-full bg-gradient-to-r from-neon-pink to-neon-purple font-semibold text-white" data-category="all">All</button>
+            <button class="category-tab px-6 py-2 rounded-full bg-gray-900 border border-neon-cyan/30 text-neon-cyan hover:border-neon-cyan transition" data-category="funny">Funny</button>
+            <button class="category-tab px-6 py-2 rounded-full bg-gray-900 border border-neon-green/30 text-neon-green hover:border-neon-green transition" data-category="relatable">Relatable</button>
+            <button class="category-tab px-6 py-2 rounded-full bg-gray-900 border border-neon-yellow/30 text-neon-yellow hover:border-neon-yellow transition" data-category="dark">Dark</button>
+            <button class="category-tab px-6 py-2 rounded-full bg-gray-900 border border-neon-cyan/30 text-neon-cyan hover:border-neon-cyan transition" data-category="tech">Tech</button>
+            <button class="category-tab px-6 py-2 rounded-full bg-gray-900 border border-neon-pink/30 text-neon-pink hover:border-neon-pink transition" data-category="student">Student</button>
+        </div>
+
+        <!-- Trending Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-poppins font-bold mb-6 bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent">
+                🔥 Trending Now
+            </h2>
+            <div id="trendingMemes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Trending memes will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Latest Uploads -->
+        <section>
+            <h2 class="text-3xl font-poppins font-bold mb-6 bg-gradient-to-r from-neon-cyan to-neon-green bg-clip-text text-transparent">
+                ⚡ Latest Uploads
+            </h2>
+            <div id="latestMemes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Latest memes will be loaded here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="loadMoreBtn" class="px-8 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-pink/50 transition">
+                    Load More Memes
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-neon-cyan/30 mt-16 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-poppins font-bold text-neon-cyan mb-4">😂 Meme Community</h3>
+                    <p class="text-gray-400 text-sm">The funkiest meme community on the internet</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-neon-pink">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="categories.html" class="hover:text-neon-cyan transition">Categories</a></li>
+                        <li><a href="rules.html" class="hover:text-neon-cyan transition">Community Rules</a></li>
+                        <li><a href="about.html" class="hover:text-neon-cyan transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-neon-pink">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="privacy.html" class="hover:text-neon-cyan transition">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-neon-cyan transition">Terms & Conditions</a></li>
+                        <li><a href="dmca.html" class="hover:text-neon-cyan transition">DMCA Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 text-neon-pink">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-neon-cyan transition">📱</a>
+                        <a href="#" class="text-2xl hover:text-neon-cyan transition">📷</a>
+                        <a href="#" class="text-2xl hover:text-neon-cyan transition">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-neon-pink/30 mt-8 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Meme Community. All rights reserved. Made with 😂 and neon vibes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/memeFeed.js"></script>
+</body>
+</html>
+

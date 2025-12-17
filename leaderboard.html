@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Meme Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            pink: '#ff00ff',
+                            cyan: '#00ffff',
+                            green: '#00ff00',
+                            yellow: '#ffff00',
+                            purple: '#cc00ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-white font-inter min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-neon-pink/30 sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-poppins font-bold bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                    😂 Meme Community
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-neon-cyan transition">Home</a>
+                    <a href="categories.html" class="text-gray-300 hover:text-neon-cyan transition">Categories</a>
+                    <a href="upload.html" class="bg-gradient-to-r from-neon-pink to-neon-purple px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-pink/50 transition">Upload Meme</a>
+                    <a href="search.html" class="text-gray-300 hover:text-neon-cyan transition">Search</a>
+                    <a href="profile.html" class="text-gray-300 hover:text-neon-cyan transition">Profile</a>
+                    <a href="login.html" class="text-gray-300 hover:text-neon-cyan transition">Login</a>
+                </div>
+                <button class="md:hidden text-neon-cyan" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-neon-pink/30 p-4 space-y-3">
+            <a href="index.html" class="block text-neon-cyan">Home</a>
+            <a href="categories.html" class="block text-gray-300">Categories</a>
+            <a href="upload.html" class="block text-gray-300">Upload Meme</a>
+            <a href="search.html" class="block text-gray-300">Search</a>
+            <a href="profile.html" class="block text-gray-300">Profile</a>
+            <a href="login.html" class="block text-gray-300">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-poppins font-bold mb-8 bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent text-center">
+            🏆 Top Creators Leaderboard
+        </h1>
+
+        <!-- Leaderboard Tabs -->
+        <div class="flex justify-center space-x-4 mb-8">
+            <button onclick="showLeaderboard('karma')" class="leaderboard-tab active px-6 py-3 rounded-lg bg-gradient-to-r from-neon-pink to-neon-purple font-semibold">
+                Karma Points
+            </button>
+            <button onclick="showLeaderboard('likes')" class="leaderboard-tab px-6 py-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                Most Likes
+            </button>
+            <button onclick="showLeaderboard('memes')" class="leaderboard-tab px-6 py-3 rounded-lg bg-gray-900 border border-gray-700 hover:border-neon-cyan transition">
+                Most Memes
+            </button>
+        </div>
+
+        <!-- Leaderboard List -->
+        <div class="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
+            <!-- Top 3 Podium -->
+            <div class="grid grid-cols-3 gap-4 p-8 bg-gradient-to-b from-gray-900 to-gray-800">
+                <div class="text-center">
+                    <div class="text-6xl mb-2">🥈</div>
+                    <img src="https://via.placeholder.com/80" alt="2nd" class="w-20 h-20 rounded-full mx-auto mb-2 border-2 border-gray-400">
+                    <div class="font-bold text-neon-cyan">@user_2nd</div>
+                    <div class="text-2xl font-bold text-neon-green mt-2">98,450</div>
+                    <div class="text-sm text-gray-400">Karma</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl mb-2">🥇</div>
+                    <img src="https://via.placeholder.com/80" alt="1st" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-neon-yellow avatar-glow">
+                    <div class="font-bold text-neon-yellow text-lg">@meme_lord_69</div>
+                    <div class="text-3xl font-bold text-neon-yellow mt-2">124,780</div>
+                    <div class="text-sm text-gray-400">Karma</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl mb-2">🥉</div>
+                    <img src="https://via.placeholder.com/80" alt="3rd" class="w-20 h-20 rounded-full mx-auto mb-2 border-2 border-orange-400">
+                    <div class="font-bold text-neon-cyan">@user_3rd</div>
+                    <div class="text-2xl font-bold text-orange-400 mt-2">87,230</div>
+                    <div class="text-sm text-gray-400">Karma</div>
+                </div>
+            </div>
+
+            <!-- Rest of Leaderboard -->
+            <div class="divide-y divide-gray-800">
+                <div class="p-4 hover:bg-gray-800 transition flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-2xl font-bold text-neon-cyan w-8">4</span>
+                        <img src="https://via.placeholder.com/50" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <div class="font-semibold">@top_creator_4</div>
+                            <div class="text-sm text-gray-400">Level 38</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-neon-green">76,540</div>
+                        <div class="text-xs text-gray-400">Karma</div>
+                    </div>
+                </div>
+                <!-- More entries... -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showLeaderboard(type) {
+            document.querySelectorAll('.leaderboard-tab').forEach(tab => {
+                tab.classList.remove('active', 'bg-gradient-to-r', 'from-neon-pink', 'to-neon-purple');
+                tab.classList.add('bg-gray-900', 'border', 'border-gray-700');
+            });
+            
+            event.target.classList.add('active', 'bg-gradient-to-r', 'from-neon-pink', 'to-neon-purple');
+            event.target.classList.remove('bg-gray-900', 'border', 'border-gray-700');
+            
+            // In production, fetch leaderboard data based on type
+            console.log('Showing leaderboard:', type);
+        }
+    </script>
+</body>
+</html>
+
